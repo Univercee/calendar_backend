@@ -14,6 +14,7 @@ class Kernel extends HttpKernel
      * @var array<int, class-string|string>
      */
     protected $middleware = [
+        \App\Http\Middleware\CorsFix::class,
         //\App\Http\Middleware\ForceJson::class,
         //\App\Http\Middleware\CheckAuth::class
     ];
