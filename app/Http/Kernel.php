@@ -14,7 +14,8 @@ class Kernel extends HttpKernel
      * @var array<int, class-string|string>
      */
     protected $middleware = [
-        \App\Http\Middleware\CorsFix::class,
+        \Fruitcake\Cors\HandleCors::class,
+        \App\Http\Middleware\ForceJson::class,
         //\App\Http\Middleware\ForceJson::class,
         //\App\Http\Middleware\CheckAuth::class
     ];
@@ -48,7 +49,6 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        'json' => \App\Http\Middleware\ForceJson::class,
         'auth' => \App\Http\Middleware\CheckAuth::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
