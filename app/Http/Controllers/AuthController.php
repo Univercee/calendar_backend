@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    public function checkLogin(Request $request){}
+
     public function authFlow(Request $request)
     {
         $user_data = $request->input("user");
@@ -31,12 +33,14 @@ class AuthController extends Controller
     //
     private function registration(Array $user_data)
     {
-        return User::add($user_data);
+        $token = User::add($user_data);
+        return response()->json(["token"=>$token]);
     }
 
     //
     private function login($user_id)
     {
-        return User::login($user_id);
+        $token = User::login($user_id);
+        return response()->json(["token"=>$token]);
     }
 }
