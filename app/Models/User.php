@@ -46,8 +46,8 @@ class User extends Authenticatable
 
     public static function findByToken($token)
     {
-        $user = DB::table("auth_tokens")->select("id")->where("token", $token)->where('expires_at', '>', Carbon::now())->first();
-        return $user->id ?? null;
+        $user = DB::table("auth_tokens")->select("user_id")->where("token", $token)->where('created_at', '>', "NOW() + INTERVAL 1 DAY")->first();
+        return $user->user_id ?? null;
     }
 
     public static function add($user_data)

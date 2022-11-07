@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateAuthTokens extends Migration
@@ -18,8 +19,7 @@ class CreateAuthTokens extends Migration
             $table->id();
             $table->foreignId("user_id");
             $table->string("token", 255);
-            $table->timestamp("created_at")->default(Carbon::now());
-            $table->timestamp("expires_at")->default(Carbon::now()->addDay(1));
+            $table->timestamp("created_at")->useCurrent();
 
             $table->foreign("user_id")->references("id")->on("users");
         });
